@@ -15,6 +15,7 @@ environ.Env.read_env(
 pymysql.install_as_MySQLdb()
 
 SECRET_KEY = env('SECRET_KEY')
+ALGORITHM = env('ALGORITHM')
 
 DATABASES = {
     'default' : {

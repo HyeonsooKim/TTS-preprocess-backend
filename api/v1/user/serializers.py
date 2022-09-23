@@ -2,8 +2,10 @@ from apps.user.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.serializers import ValidationError
+from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model
 from datetime import date
+from .tokens import generate_token
 
 User = get_user_model()
 
@@ -65,18 +67,22 @@ class SignInSerializers(serializers.ModelSerializer):
             user = User.objects.get(username=username)
 
             if not user.check_password(password):
-                raise serializers.ValidationError("Wrong password")
+                raise AuthenticationFailed("Wrong password")
         else:
-            raise serializers.ValidationError("User account not exist")
+            raise AuthenticationFailed("User account not exist")
 
-        token = RefreshToken.for_user(user)
-        refresh = str(token)
-        access = str(token.access_token)
+        payload_value = user.id
+        payload = {
+            "subject": payload_value,
+        }
+
+        access_token = generate_token(payload, "access")
+        refresh_token = generate_token(payload, "refresh")
 
         data = {
             'user': username,
-            'refresh': refresh,
-            'access': access,
+            'refresh': refresh_token,
+            'access': access_token,
         }
 
         return data
