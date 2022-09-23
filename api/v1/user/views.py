@@ -4,7 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
-from .tokens import generate_token
+from rest_framework.exceptions import AuthenticationFailed
+import jwt
+from decouple import config
+from .tokens import generate_token, validate_token
 
 class UserSignUpView(APIView):
     serializer_class = SignUpSerializer
@@ -71,12 +74,11 @@ class UserSignInView(APIView):
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
-        print(serializer)
         if serializer.is_valid(raise_exception=False):
-            print('validated: ', serializer.validated_data)
             user = serializer.validated_data['user']
             access_token = serializer.validated_data['access']
             refresh_token = serializer.validated_data['refresh']
+
             res = Response(
                 {
                     "user": user,
@@ -96,3 +98,25 @@ class UserSignInView(APIView):
 
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserView(APIView) :
+    """
+    유저 로그인여부 확인 뷰
+    """
+    def get(self,request):
+        access_token = request.COOKIES.get('access')
+        payload = validate_token(access_token)
+        user = User.objects.filter(id=payload['subject']).first()
+        serializer = SignInSerializers(user)
+
+        return Response(serializer.data)
+
+class UserSignoutView(APIView) :
+  def post(self,request):
+    res = Response()
+    res.delete_cookie('access')
+    res.data = {
+        "message" : 'Signout success'
+      }
+
+    return res
