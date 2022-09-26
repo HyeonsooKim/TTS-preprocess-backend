@@ -1,4 +1,6 @@
 from django.db import models
+from apps.user.models import User
+from django.conf import settings
 
 class TimeStampedModel(models.Model):
     """
@@ -11,6 +13,11 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 class Project(TimeStampedModel):
-    index = models.IntegerField(primary_key=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     project_id = models.IntegerField(unique=True, null=False)
-    project_title = models.CharField(max_length=100)
+    project_title = models.CharField(verbose_name='프로젝트 이름', max_length=100)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['project_id', 'user'], name='unique_project_user')
+        ]
