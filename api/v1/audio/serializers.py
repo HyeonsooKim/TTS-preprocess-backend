@@ -21,9 +21,9 @@ class AudioCreateSerializer(AudioSerializer):
         print('dir(self.context)', dir(self.context['view']), self.context['view'])
         current_user = self.context['request'].user
         pk = self.context.get('view').kwargs['pk']
-        project = get_object_or_404(Project, user=current_user, id=pk)
-        attrs['project'] = project
-        audios = Audio.objects.filter(project=project).order_by('audio_id')
+        project_id = get_object_or_404(Project, user=current_user, id=pk)
+        attrs['project_id'] = project_id
+        audios = Audio.objects.filter(project_id=project_id).order_by('audio_id')
 
         # 아이디가 없거나 유효 범위를 벗어날 경우 마지막 아이디로 설정
         id = attrs.get('audio_id', None)
@@ -41,7 +41,7 @@ class AudioCreateSerializer(AudioSerializer):
     def create(self, validated_data):
         # 뒤에 있는 아이디 1씩 증가
         audios = Audio.objects.filter(
-            project=validated_data['project_id'],
+            project_id=validated_data['project_id'],
             audio_id__gte=validated_data['audio_id']
         ).order_by('-audio_id')
         for audio in audios:

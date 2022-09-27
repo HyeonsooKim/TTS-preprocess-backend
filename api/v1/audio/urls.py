@@ -8,5 +8,5 @@ from .views import ProjectAudioListCreateView, ProjectAudioDetailView
 
 urlpatterns = [
     path('', ProjectAudioListCreateView.as_view()),
-    path('<int:pk>', ProjectAudioDetailView.as_view()),
+    path('/<int:pk>', ProjectAudioDetailView.as_view()),
 ]

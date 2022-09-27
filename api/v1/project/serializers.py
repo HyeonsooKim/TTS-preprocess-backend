@@ -10,18 +10,18 @@ from api.v1.audio.utils import create_audio
 from apps.project.models import Project
 from .utils import preprocess
 
-class ProjectSerializers(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
 
-class ProjectCreateSerializers(ProjectSerializers):
+class ProjectCreateSerializer(ProjectSerializer):
     text = serializers.ListField(
         child=serializers.CharField(),
         max_length=1,
         write_only=True
     )
-    project = ProjectSerializers(read_only=True)
+    project = ProjectSerializer(read_only=True)
 
     @transaction.atomic()
     def create(self, validated_data):

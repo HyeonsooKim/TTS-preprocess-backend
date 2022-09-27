@@ -32,8 +32,8 @@ class ProjectAudioListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         id = self.kwargs['pk']
-        project = Project.objects.get(id=id)
-        return Audio.objects.filter(project=project).order_by('audio_id')
+        project_id = Project.objects.get(id=id)
+        return Audio.objects.filter(project_id=project_id).order_by('audio_id')
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -44,8 +44,8 @@ class ProjectAudioListCreateView(ListCreateAPIView):
 
 class ProjectAudioDetailView(RetrieveUpdateDestroyAPIView):
     def get_object(self):
-        project = get_object_or_404(Project, id=self.kwargs['pk'])
-        return get_object_or_404(Audio, project=project, audio_id=self.kwargs['audio_id'])
+        project_id = get_object_or_404(Project, id=self.kwargs['pk'])
+        return get_object_or_404(Audio, project_id=project_id, audio_id=self.kwargs['audio_id'])
 
     def get_serializer_class(self):
         if self.request.method == 'GET':

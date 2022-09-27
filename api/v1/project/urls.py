@@ -4,11 +4,11 @@ from rest_framework.routers import DefaultRouter
 # Django
 from django.urls import path, include
 # Internal
-from .views import ProjectViewSets
+from .views import ProjectCreateView, ProjectDestroyView
 
-router = DefaultRouter()
-router.register(r'', ProjectViewSets)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', ProjectCreateView.as_view()),
+    path('<int:pk>', ProjectDestroyView.as_view()),
+    path('<int:pk>/audio', include('api.v1.audio.urls')),
 ]

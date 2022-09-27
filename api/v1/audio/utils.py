@@ -1,6 +1,6 @@
 from apps.audio.models import Audio
 
-def create_audio(project, li):
+def create_audio(project_id, li):
     """ 오디오 생성 함수 """
     res = []
 
@@ -9,7 +9,7 @@ def create_audio(project, li):
         audio = Audio.objects.create(
             audio_id=i + 1,
             text=txt,
-            project=project
+            project_id=project_id
         )
         res.append((audio.id, audio.text))
 
