@@ -1,16 +1,6 @@
 from django.db import models
-from apps.user.models import User
+from apps.common.models import TimeStampedModel
 from django.conf import settings
-
-class TimeStampedModel(models.Model):
-    """
-    created_at, updated_at 필드 생성을 위한 기본 모델
-    """
-    create_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
 
 class Project(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -64,6 +64,7 @@ LOCAL_APPS = [
     # Add local apps
     'apps.user.apps.UserConfig',
     'apps.project.apps.ProjectConfig',
+    'apps.audio.apps.AudioConfig',
 ]
 
 DJANGO_APPS = [
