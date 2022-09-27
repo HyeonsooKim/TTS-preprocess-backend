@@ -1,6 +1,11 @@
+# apps.project.models.py
+
+# Django
 from django.db import models
-from apps.common.models import TimeStampedModel
 from django.conf import settings
+
+# Internal
+from apps.common.models import TimeStampedModel
 
 class Project(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -1,7 +1,10 @@
-from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+# apps.user.models.py
+
+# Django
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, name, username, password=None):

@@ -1,12 +1,16 @@
-from .serializers import SignUpSerializer, SignInSerializers
-from apps.user.models import User
+# api.v1.user.views.py
+# DRF
 from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
+# Third Party
 import jwt
 from decouple import config
+# Internal
+from apps.user.models import User
+from .serializers import SignUpSerializer, SignInSerializers
 from .tokens import generate_token, validate_token
 
 class UserSignUpView(APIView):
@@ -112,11 +116,14 @@ class UserView(APIView) :
         return Response(serializer.data)
 
 class UserSignoutView(APIView) :
-  def post(self,request):
-    res = Response()
-    res.delete_cookie('access')
-    res.data = {
-        "message" : 'Signout success'
-      }
+    """
+    로그아웃 뷰
+    """
+    def post(self,request):
+        res = Response()
+        res.delete_cookie('access')
+        res.data = {
+            "message" : 'Signout success'
+        }
 
-    return res
+        return res

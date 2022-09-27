@@ -1,10 +1,14 @@
+# api.v1.user.urls.py
+
+# Django
 from django.urls import path, include
+# DRF
 from rest_framework.routers import DefaultRouter
-from .views import UserSignUpView, UserSignInView, UserView, UserSignoutView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+# Internal
+from .views import UserSignUpView, UserSignInView, UserView, UserSignoutView
 
 router = DefaultRouter()
-# router.register('sign-in', UserSignInView, basename='sign-in')
 
 urlpatterns =[
     path('', include(router.urls)),

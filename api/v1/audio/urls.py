@@ -1,11 +1,12 @@
-from django.urls import path, include
-from .views import ProjectViewSets
+# api.v1.audio.urls.py
+# DRF
 from rest_framework.routers import DefaultRouter
-
-router = DefaultRouter()
-router.register(r'', ProjectViewSets)
+# Django
+from django.urls import path, include
+# Internal
+from .views import ProjectAudioListCreateView, ProjectAudioDetailView
 
 urlpatterns = [
-    path('', include(router.urls)),
-    # path("project/", ProjectViewSets.as_view()),
+    path('', ProjectAudioListCreateView.as_view()),
+    path('/<int:audio_id>', ProjectAudioDetailView.as_view()),
 ]

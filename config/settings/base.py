@@ -1,8 +1,9 @@
 import os
 import pymysql
 import datetime
-from pathlib import Path
 import environ
+
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 

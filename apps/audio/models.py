@@ -1,4 +1,8 @@
+# apps.audio.models.py
+
+# Django
 from django.db import models
+# Internal
 from apps.common.models import TimeStampedModel
 from apps.project.models import Project
 
@@ -10,7 +14,6 @@ class Audio(TimeStampedModel):
         (1.5, 1.5),
         (2.0, 2.0),
     )
-
     create_time = None
     text = models.TextField(verbose_name="변환 전 텍스트", default="")
     speed = models.FloatField(verbose_name="오디오 속도", choices=SPEED, default=1.0)

@@ -1,5 +1,10 @@
-from django.shortcuts import render
+# api.v1.project.views.py
+
+# DRF
 from rest_framework import viewsets
+# Django
+from django.shortcuts import render
+# Internal
 from .serializers import ProjectSerializers
 from apps.project.models import Project
 

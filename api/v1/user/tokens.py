@@ -1,8 +1,13 @@
-# tokens.py
+# api.v1.user.tokens.py
+
+# DRF
+from rest_framework.exceptions import AuthenticationFailed
+# Third Party
+from decouple import config
 import jwt
 import datetime
-from decouple import config
-from rest_framework.exceptions import AuthenticationFailed
+
+
 
 def generate_token(payload, type):
     if type == "access":
@@ -19,7 +24,6 @@ def generate_token(payload, type):
     encoded = jwt.encode(payload, config("SECRET_KEY"), algorithm=config("ALGORITHM"))
 
     return encoded
-
 
 def validate_token(access_token):
     if not access_token :

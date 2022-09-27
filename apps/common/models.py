@@ -1,3 +1,6 @@
+# apps.common.models.py
+
+# Django
 from django.db import models
 
 class TimeStampedModel(models.Model):
