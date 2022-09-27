@@ -31,7 +31,6 @@ class ProjectAudioListCreateView(ListCreateAPIView):
     serializer_class = AudioSerializer
 
     def get_queryset(self):
-        print("self.kwargs['pk']", self.kwargs)
         id = self.kwargs['pk']
         project = Project.objects.get(id=id)
         return Audio.objects.filter(project=project).order_by('audio_id')

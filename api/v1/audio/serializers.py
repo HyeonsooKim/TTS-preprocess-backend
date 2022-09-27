@@ -16,9 +16,9 @@ class AudioSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AudioCreateSerializer(AudioSerializer):
-
     def validate(self, attrs):
         # 현재 프로젝트의 오디오 목록 불러오기
+        print('dir(self.context)', dir(self.context['view']), self.context['view'])
         current_user = self.context['request'].user
         pk = self.context.get('view').kwargs['pk']
         project = get_object_or_404(Project, user=current_user, id=pk)

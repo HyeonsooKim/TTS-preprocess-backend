@@ -112,7 +112,7 @@ class UserView(APIView) :
         payload = validate_token(access_token)
         user = User.objects.filter(id=payload['subject']).first()
         serializer = SignInSerializers(user)
-
+        print("serializer.data: ", serializer.data)
         return Response(serializer.data)
 
 class UserSignoutView(APIView) :
