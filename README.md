@@ -13,7 +13,10 @@
 
 
 ## 프로젝트 개요
-
+- TTS 딥러닝 모델에 사용하기 위한 데이터 전처리 백엔드 구현
+- user 기능 추가
+- Project 기능 추가
+- Project 단위로 n개의 Audio 추가
 
 
 <br>
@@ -65,14 +68,15 @@
 
 
 ## ERD
-ERD 
+<img width="813" alt="스크린샷 2022-09-27 오후 11 21 22" src="https://user-images.githubusercontent.com/48047773/192552501-b3686520-849a-45c4-b4bc-ffd1d05b62b8.png">
 
 
 <br>
 
 
 ## API 목록
-API 명세 주소
+![127 0 0 1_8000_api_v1_swagger (1)](https://user-images.githubusercontent.com/48047773/192550332-418d9600-ef7d-4295-a968-6f71880698ad.png)
+
 
 <br>
 
