@@ -75,7 +75,7 @@
 
 
 ## API 목록
-![127 0 0 1_8000_api_v1_swagger (1)](https://user-images.githubusercontent.com/48047773/192550332-418d9600-ef7d-4295-a968-6f71880698ad.png)
+![127 0 0 1_8000_api_v1_swagger (2)](https://user-images.githubusercontent.com/48047773/193191558-3f43608a-d38a-4367-ae3e-55d095a8fe6a.png)
 
 
 <br>
